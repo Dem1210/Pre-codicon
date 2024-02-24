@@ -1,81 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-		<script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex flex-col h-screen w-screen bg-zinc-900 text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="flex flex-col text-white">
+    <div
+      class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+    ></div>
 
-	<!-- Menu superior -->
-	<header class="bg-[#593B7F] flex flex-row font-bold gap-4 justify-between items-center box-content px-4 py-2 rounded-b-3xl">
-		<div>
-			<img src="" alt="logo">
-		</div>
+    <header
+      class="flex w-screen h-16 justify-between px-6 py-3 sticky top-0 z-10"
+    >
+      <h2
+        class="text-xl font-semibold flex items-center gap-2 text-center justify-center"
+      >
+        <span>
+          <img src="./resources/svgs/logo.svg" class="size-10" alt="logo" />
+        </span>
+        <span>T.music</span>
+      </h2>
+      <button>
+        <img
+          src="./resources/svgs/menu_hamburguesa.svg"
+          class="size-6"
+          alt=""
+        />
+      </button>
+    </header>
 
-		<h2 class="capitalize">T music</h2>
+    <main class="max-w-lg mx-auto">
+      <section class="my-1 flex w-full flex-col gap-4">
+        <button
+          class="group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-violet-600 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur origin-left hover:decoration-2 hover:text-violet-300 relative bg-neutral-800 h-16 w-full text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-violet-600 after:right-8 after:top-3 after:rounded-full after:blur-lg flex-1 flex gap-5 text-pretty"
+        >
+          <p
+            class="md:hidden z-20 animate-pulse hover:animate-none transition-all"
+          >
+            Descubre tu proxima playlist
+          </p>
+          <p
+            class="hidden z-20 animate-pulse hover:animate-none md:block transition-all"
+          >
+            Descubre el infinito mundo de posibilidades de T·Music
+          </p>
+          <img
+            src="./resources/svgs/shines.svg"
+            class="size-6 z-[100]"
+            alt=""
+          />
+        </button>
+      </section>
 
-		<button class="hover:bg-[#2A3556] hover:text-white bg-[#474f7a] text-white transition-colors ease duration-300 rounded-3xl px-9 py-1">Login</button>
-	</header>
+      <!-- Reproductor de musica -->
+      <section
+        class="my-6 max-w-lg mx-auto items-center justify-between flex gap-2"
+      >
+        <aside class="flex flex-col">
+          <header class="flex flex-col items-center grid gap-2 text-center">
+            <h2 class="text-lg font-semibold">Now playing</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+              Song name - Artist name
+            </p>
+            <button>
+              <img
+                src="./resources/svgs/heart.svg"
+                class="size-6 bg-white rounded-full"
+                alt=""
+              />
+            </button>
+            <button>
+              <img
+                src="./resources/svgs/play-pause.svg"
+                class="size-10 bg-white rounded-full"
+                alt=""
+              />
+            </button>
+          </header>
+          <div>
+            <button></button>
 
+            <button></button>
+          </div>
+        </aside>
 
-	<!-- Cuerpo de la pagina -->
-	<main>
-	<div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] z-[-1]"></div>
-		<!-- Seccion de descubrimiento -->
-		<section class="my-8">
-			<div class="flex gap-4 px-4 py-2 bg-[#474f7a] m-2 rounded-md text-white hover:bg-[#2A3556] transition-colors ease duration-300 cursor-pointer text-pretty">
-				<h1>Descubre tu proxima playlist</h1>
-				<button class="hover:bg-[#2A3556] transition-colors ease duration-300 flex flex items-center ">
-					Comenzar <img src="./resources/svgs/play-pause.svg" class="size-12" alt="">
-				</button>
-			</div>
-		</section>
+        <main>
+          <img
+            src="https://i.ytimg.com/vi/eL2foCWyqns/maxresdefault.jpg"
+            alt="Album Cover"
+            class="object-cover rounded-xl size-44 lg:size-64"
+            style="aspect-ratio: 300 / 300; object-fit: cover"
+          />
+        </main>
+      </section>
 
+      <!-- Controles de musica -->
+      <section></section>
+    </main>
 
-		<!-- Canciones y generos -->
-		<section>
-			<ul>
-				<li>Genero 1</li>
-				<li>Genero 2</li>
-				<li>Genero 3</li>
-				<li>Genero 4</li>
-				<li>Genero 5</li>
-				<li>Genero 6</li>
-			</ul>
-		</section>
-
-		<!-- Reproductor y like -->
-		<section>
-			<div>
-				------*--------
-			</div>
-			<div>
-				<button>pause/play</button>
-			</div>
-		</section>
-
-		<footer class="bg-white fixed bottom-0 w-screen flex gap-4 px-4 py-2 items-center justify-between">
-			<div>
-				<button>
-					<img src="" alt="library">
-				</button>
-			</div>
-			<div>
-				<button>
-					<img src="./resources/svgs/Pomodero_tiempo.svg" class="size-6 text-white" alt="pomodoro">
-				</button>
-			</div>
-			<div>
-				<button>
-					<img src="" alt="home">
-				</button>
-			</div>
-		</footer>
-
-	</main>
-
-
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  </body>
 </html>
