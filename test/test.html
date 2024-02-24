@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>T·Music | Un infinito mundo de posibilidades.</title>
+    <link rel="stylesheet" href="/resources/css/global.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex h-screen w-screen">
+	<main>
+
+		<!-- Menu Header -->
+		<header class="inicio flex w-screen">
+			<div class="logo">
+				<img  src="" alt="Logo">
+			</div>
+			<h2 id="titulo">T·Music</h2>
+			<button  id="request" class="hover:bg-[#2A3556] transition-colors ease duration-300 px-4 py-2 rounded-md">
+				<img src="./resources/svgs/Menu_Hamburguesa.svg" alt="" class="size-6 text-white hover:text-white">
+			</button>
+		</header>
+
+		<!-- generos y demas -->
+		<section class="flex flex-col flex-1 w-full items-center">
+
+			<div class="flex gap-4 px-4 py-2 bg-[#474f7a] m-2 rounded-md text-white">
+				<h1>Descubre tu proxima playlist</h1>
+				<button>
+					<img src="./resources/svgs/rocket.svg" alt="Icono de busqueda" class="size-6">
+				</button>
+			</div>
+
+			<div>
+				<ul class="flex gap-6 justify-start">
+					<li>Genero 1</li>
+					<li>Genero 2</li>
+					<li>Genero 3</li>
+				</ul>
+			</div>
+			<div>
+				<ul class="flex gap-6 justify-start">
+					<li>Genero 4</li>
+					<li>Genero 5</li>
+					<li>Genero 6</li>
+				</ul>
+			</div>
+		</section>
+
+
+		<!-- Section reproductor de musica y like -->
+		<section class="reproductor flex flex-col">
+			<div id="info" class="flex flex-col items-center gap-4">
+				<img src-="" alt="Artista">
+				<p>Cancion</p>
+				<p>Artista</p>
+			</div>
+			<div id="manejo-c"> 
+				<button>Prev</button>
+				<button><img src="./resources/svgs/play-pause.svg" alt="" class="size-6"></button>
+				<button>Next</button>
+			</div>	
+			<div id="interacciones">
+				<button><img src="./resources/svgs/heart.svg" alt=""></button>
+				<button>letras</button>
+				<button><img src="./resources/svgs/Menu_Hamburguesa.svg"></button>
+			</div>
+		</section>
+
+		<!-- Menu Footer -->
+		<footer class="bg-[#1f2544] bottom-0 fixed flex w-screen items-center px-8 py-4 gap-10 place-content-center [&>button>img]:size-8 [&>button]: transition-colors ease duration-300">
+			<button>
+				<img src="" alt="Biblioteca">
+			</button>
+			<button>
+				<img src="./resources/svgs/Reloj_pomodoro.svg" alt="">
+			</button>
+			<button>
+				<img src="./resources/svgs/Home.svg" alt="">
+			</button>
+		</footer>
+		
+	</main>
+</body>
+
+<script src="js/auth_spotify.js"></script>
+</html>

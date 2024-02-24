@@ -1,0 +1,62 @@
+*{
+    box-sizing: border-box; 
+    padding: 0px;
+    margin: 0px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+body{
+    background-color: #81689d
+}
+
+
+/* Cabecera del inicio */
+
+.inicio { 
+    z-index: 10;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0px 0px 5px 5px;
+    background-color: #1f2544;
+    flex: 1 1 0%;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+
+
+#titulo {
+    font-size: 1.5rem;  
+    font-weight: 700;
+    color: white;
+}
+
+.reproductor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+}
+#manejo-c{
+    border: 2px solid black;
+
+}
+
+/* section{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    place-items: center;
+    gap: 2.5rem; 
+} */
+
+/* 
+* Por encima de todo
+* Tres columnas
+* Gap
+* Alineados horizontal y verticalmente
+ */

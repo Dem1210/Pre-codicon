@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col h-screen w-screen bg-zinc-900 text-white">
+
+	<!-- Menu superior -->
+	<header class="bg-[#593B7F] flex flex-row font-bold gap-4 justify-between items-center box-content px-4 py-2 rounded-b-3xl">
+		<div>
+			<img src="" alt="logo">
+		</div>
+
+		<h2 class="capitalize">T music</h2>
+
+		<button class="hover:bg-[#2A3556] hover:text-white bg-[#474f7a] text-white transition-colors ease duration-300 rounded-3xl px-9 py-1">Login</button>
+	</header>
+
+
+	<!-- Cuerpo de la pagina -->
+	<main>
+	<div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] z-[-1]"></div>
+		<!-- Seccion de descubrimiento -->
+		<section class="my-8">
+			<div class="flex gap-4 px-4 py-2 bg-[#474f7a] m-2 rounded-md text-white hover:bg-[#2A3556] transition-colors ease duration-300 cursor-pointer text-pretty">
+				<h1>Descubre tu proxima playlist</h1>
+				<button class="hover:bg-[#2A3556] transition-colors ease duration-300 flex flex items-center ">
+					Comenzar <img src="./resources/svgs/play-pause.svg" class="size-12" alt="">
+				</button>
+			</div>
+		</section>
+
+
+		<!-- Canciones y generos -->
+		<section>
+			<ul>
+				<li>Genero 1</li>
+				<li>Genero 2</li>
+				<li>Genero 3</li>
+				<li>Genero 4</li>
+				<li>Genero 5</li>
+				<li>Genero 6</li>
+			</ul>
+		</section>
+
+		<!-- Reproductor y like -->
+		<section>
+			<div>
+				------*--------
+			</div>
+			<div>
+				<button>pause/play</button>
+			</div>
+		</section>
+
+		<footer class="bg-white fixed bottom-0 w-screen flex gap-4 px-4 py-2 items-center justify-between">
+			<div>
+				<button>
+					<img src="" alt="library">
+				</button>
+			</div>
+			<div>
+				<button>
+					<img src="./resources/svgs/Pomodero_tiempo.svg" class="size-6 text-white" alt="pomodoro">
+				</button>
+			</div>
+			<div>
+				<button>
+					<img src="" alt="home">
+				</button>
+			</div>
+		</footer>
+
+	</main>
+
+
+</body>
+</html>
