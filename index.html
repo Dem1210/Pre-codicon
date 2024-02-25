@@ -21,7 +21,7 @@
       <div class="drawer-content h-screen flex flex-col">
         <!-- Navbar -->
         <div
-          class="w-full navbar sticky top-0 bg-neutral-950/20 backdrop-blur-lg rounded-b-2xl"
+          class="w-full navbar sticky top-0 z-[100] bg-neutral-950/20 backdrop-blur-xl rounded-b-2xl"
         >
           <a href="/index.html" class="flex-1 px-2 mx-2">
             <h2 class="gap-3 flex items-center text-xl text-center">
@@ -54,8 +54,8 @@
           <div class="flex-none hidden lg:block">
             <ul class="menu menu-horizontal">
               <!-- Navbar menu content here -->
-              <li><button class="rounded-full">Registrarse</button></li>
-              <li><button class="rounded-full">Iniciar Sesion</button></li>
+              <li><button class="rounded-full" onclick="register()">Registrarse</button></li>
+              <li><button class="rounded-full" onclick="login()">Iniciar Sesion</button></li>
             </ul>
           </div>
         </div>

@@ -2,7 +2,6 @@ const APIController = (function () {
   const clientId = "60752f3b45744b0dabdd0c951db7f4c9";
   const clientSecret = "9c7c9480f1444094a80144e8da001055";
 
-  // private methods
   const _getToken = async () => {
     const result = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
@@ -14,7 +13,7 @@ const APIController = (function () {
     });
 
     const data = await result.json();
-    console.log(data.access_token);
+    localStorage.setItem("spotify_token", data.access_token);
     return data.access_token;
   };
 
@@ -89,7 +88,6 @@ const APIController = (function () {
 
 // UI Module
 const UIController = (function () {
-  //object to hold references to html selectors
   const DOMElements = {
     selectGenre: "#select_genre",
     selectPlaylist: "#select_playlist",
@@ -99,9 +97,7 @@ const UIController = (function () {
     divSonglist: ".song-list",
   };
 
-  //public methods
   return {
-    //method to get input fields
     inputField() {
       return {
         genre: document.querySelector(DOMElements.selectGenre),
@@ -127,47 +123,32 @@ const UIController = (function () {
         .insertAdjacentHTML("beforeend", html);
     },
 
-    // need method to create a track list group item
     createTrack(id, name, preview) {
-      // const html = `<a href="#" class="list-group-item list-group-item-action list-group-item-light" id="${id}">${name} - ${preview}</a>`;
-      // const html = `<a href="#" class="flex flex-col" id="${id}">${name} - <img src="${preview}" alt="${name}"></a>`;
-      const html = `<li><a class="list-group-item flex flex-col">${name} <img src="${preview}" alt="${name}" width="200" height="300"></a><a href="${id}">Escuchar</a></li>`;
+      const html = `
+      <li class="flex flex-col gap-4 items-center justify-center text-center rounded-lg p-2 w-full">
+        <a class="list-group-item flex flex-col gap-4 items-center justify-center text-center rounded-lg transition-colors duration-300 ease-in-out w-full">
+          <span class="text-balance font-bold text-white text-xs">${name}</span>
+          <img src="${preview}" alt="${name}" class="w-full h-full aspect-square rounded-lg object-cover">
+        </a>
+        <div class="flex gap-1 w-full">
+          <a class="btn btn-primary btn-sm text-xs w-[70%]" href="${id}">
+            reproducir
+          </a>
+          <button class="btn btn-ghost btn-sm w-[30%] liked">
+            <img src="./resources/svgs/heart_filled.svg" class="size-6" alt="like"/>
+          </button>    
+        </div>
+      </li>`;
       document
         .querySelector(DOMElements.divSonglist)
         .insertAdjacentHTML("beforeend", html);
     },
 
-    // need method to create the song detail
     createTrackDetail(img, title, artist, preview_song) {
       const detailDiv = document.querySelector(DOMElements.divSongDetail);
-      // any time user clicks a new song, we need to clear out the song detail div
       detailDiv.innerHTML = "";
 
       const html = `<audio src="${preview_song}" autoplay></audio>`;
-
-      //   const html = `<iframe
-      //   title="Spotify Embed: Recommendation Playlist "
-      //   src="${url_song}utm_source=generator&theme=0"
-      //   width="100%"
-      //   height="100%"
-      //   style={{ minHeight: '360px' }}
-      //   frameBorder="0"
-      //   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      //   loading="lazy"
-      // />`
-
-      // const html =
-      // `
-      // <div class="row col-sm-12 px-0">
-      //     <img src="${img}" alt="">
-      // </div>
-      // <div class="row col-sm-12 px-0">
-      //     <label for="Genre" class="form-label col-sm-12">${title}:</label>
-      // </div>
-      // <div class="row col-sm-12 px-0">
-      //     <label for="artist" class="form-label col-sm-12">By ${artist}:</label>
-      // </div>
-      // `;
 
       detailDiv.insertAdjacentHTML("beforeend", html);
     },
@@ -187,66 +168,44 @@ const UIController = (function () {
     },
 
     storeToken(value) {
-      document.querySelector(DOMElements.hfToken).value = value;
+      localStorage.setItem("spotify_token", value);
     },
 
     getStoredToken() {
       return {
-        token: document.querySelector(DOMElements.hfToken).value,
+        token: localStorage.getItem("spotify_token"),
       };
     },
   };
 })();
 
 const APPController = (function (UICtrl, APICtrl) {
-  // get input field object ref
   const DOMInputs = UICtrl.inputField();
 
-  // get genres on page load
   const loadGenres = async () => {
-    //get the token
     const token = await APICtrl.getToken();
-    //store the token onto the page
     UICtrl.storeToken(token);
-    //get the genres
     const genres = await APICtrl.getGenres(token);
-    //populate our genres select element
     genres.forEach((element) => UICtrl.createGenre(element.name, element.id));
   };
 
-  // create genre change event listener
   DOMInputs.genre.addEventListener("change", async () => {
-    //reset the playlist
     UICtrl.resetPlaylist();
-    //get the token that's stored on the page
     const token = UICtrl.getStoredToken().token;
-    // get the genre select field
     const genreSelect = UICtrl.inputField().genre;
-    // get the genre id associated with the selected genre
     const genreId = genreSelect.options[genreSelect.selectedIndex].value;
-    // ge the playlist based on a genre
     const playlist = await APICtrl.getPlaylistByGenre(token, genreId);
-    // create a playlist list item for every playlist returned
     playlist.forEach((p) => UICtrl.createPlaylist(p.name, p.tracks.href));
   });
 
-  // create submit button click event listener
   DOMInputs.submit.addEventListener("click", async (e) => {
-    // prevent page reset
     e.preventDefault();
-    // clear tracks
     UICtrl.resetTracks();
-    //get the token
     const token = UICtrl.getStoredToken().token;
-    // get the playlist field
     const playlistSelect = UICtrl.inputField().playlist;
-    // get track endpoint based on the selected playlist
     const tracksEndPoint =
       playlistSelect.options[playlistSelect.selectedIndex].value;
-    // get the list of tracks
     const tracks = await APICtrl.getTracks(token, tracksEndPoint);
-    // tracks.forEach(el => console.log(el.track.album.images));
-    // create a track list item
     tracks.forEach((el) =>
       UICtrl.createTrack(
         el.track.href,
@@ -256,25 +215,12 @@ const APPController = (function (UICtrl, APICtrl) {
     );
   });
 
-  // create song selection click event listener
   DOMInputs.tracks.addEventListener("click", async (e) => {
-    // prevent page reset
     e.preventDefault();
     UICtrl.resetTrackDetail();
-    // get the token
     const token = UICtrl.getStoredToken().token;
-    // get the track endpoint
-    // console.log(e);
-    // const trackEndpoint = e.target.id;
     const trackEndpoint = e.target.href;
-    // console.log(token);
-    // console.log(trackEndpoint);
-    // console.log(e.target.href);
-    //get the track object
     const track = await APICtrl.getTrack(token, trackEndpoint);
-    console.log(track);
-    // load the track details
-    // console.log('aaaaa');
     UICtrl.createTrackDetail(
       track.album.images[2].url,
       track.name,
@@ -333,8 +279,6 @@ const APPController = (function (UICtrl, APICtrl) {
           audio.play();
         } else {
           audio.pause();
-          audio.remove();
-          audio = null;
         }
       } else {
         audio = new Audio(songs[0].preview_url);
@@ -346,10 +290,10 @@ const APPController = (function (UICtrl, APICtrl) {
   const album = document.getElementById("album-cover");
   const track = document.getElementById("song-name");
   const play = document.getElementById("play");
-  const like = document.getElementById("like");
   const quite = document.getElementById("quite");
   const artist = document.getElementById("artist-name");
   const description = document.getElementById("song-description");
+  const liked = document.getElementsByClassName("liked");
 
   const descubrir = document.getElementById("descubrir");
   descubrir.addEventListener("click", () => {
@@ -364,5 +308,4 @@ const APPController = (function (UICtrl, APICtrl) {
   };
 })(UIController, APIController);
 
-// will need to call a method to load the genres on page load
 APPController.init();
