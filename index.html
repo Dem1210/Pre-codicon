@@ -90,7 +90,7 @@
           >
             <a href="#" class="group relative block bg-black rounded-lg h-full w-full">
               <img
-              id="album-cover"
+                id="album-cover"
                 alt="album-cover"
                 src=""
                 class="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50 rounded-lg"
@@ -204,53 +204,72 @@
               </footer>
             </aside>
           </section>
-
-
-          <input type="hidden" id="hidden_token" />
           
-
-          <div class="text-white">
-            <label for="Genre" class="form-label col-sm-2"
-              >Elige un género:</label
-            >
-            <select
-              name=""
-              id="select_genre"
-              class="form-control form-control-sm col-sm-10 text-black"
-            ></select>
+<!-- NECESITA EL TOKEN 👍 -->
+        <input type="hidden" id="hidden_token" />
+        <!-- OBTIENE AUTOMÁTICAMENTE LOS GÉNEROS -->
+        <div style="color:black;">
+          <label for="Genre" class="form-label col-sm-2">Elige un género:</label>
+          <select name="" id="select_genre" class="form-control form-control-sm col-sm-10">
+            <option>Select...</option>
+          </select>
+        </div>
+        <!-- OBTIENE AUTOMÁTICAMENTE PLAYLIST PARA EL GÉNERO SELECCIOANDO -->
+        <div style="color:black;">
+          <label for="Genre" class="form-label col-sm-2">Playlists:</label>
+          <select name="" id="select_playlist" class="form-control form-control-sm col-sm-10">
+            <option>Select...</option>
+          </select>
+        </div>
+        <!-- AL DARLE A BUSCAR, BUSCA 👍 -->
+        <div style="color:black;">
+          <button type="submit" id="btn_submit" class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Buscar
+          </button>
+        </div>
+        
+        <!-- TRAE UNA LISTA DE LAS CANCIONES. LA DESCRIPCIÓN DE LA CANCIÓN SE ACTIVA AL DARLE CLICK A LA MISMA -->
+        <div class="row" style="color: lightgray;">
+          <div class="col-sm-6 px-0">
+            <!-- <div class="list-group song-list"></div> -->
           </div>
-    
-          <div class="text-white">
-            <label for="Genre" class="form-label col-sm-2">Playlists:</label>
-            <select
-              name=""
-              id="select_playlist"
-              class="form-control form-control-sm col-sm-10 text-black"
-            >
-            </select>
-          </div>
-
-          <div style="color: black">
-            <button
-              type="submit"
-              id="btn_submit"
-              class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Buscar
-            </button>
-          </div>
-
-          <!-- TRAE UNA LISTA DE LAS CANCIONES. LA DESCRIPCIÓN DE LA CANCIÓN SE ACTIVA AL DARLE CLICK A LA MISMA -->
-          <div class="row" style="color: lightgray">
-            <div class="col-sm-6 px-0"></div>
-          </div>
-
-          
+          <!-- <div class="offset-md-1 col-sm-4" id="song-detail"></div> -->
+        </div>
+        
+        <!-- awdfjaoiwefoiwa -->
 
 
-          <div id="song-detail"></div>
-        </main>
-      </div>
+        <!-- Grid de videos-->
+        <section class="">
+          <ul class="grid grid-cols-3 gap-6 p-2 [&>li>img]:rounded-lg [&>li>img]:aspect-square song-list">
+            <!-- <li>
+              <img src="https://picsum.photos/200/300" alt="" />
+              <div
+                class="w-full h-14 bg-neutral-900/80 relative bottom-[55px] rounded-b-lg flex justify-center text-sm">
+                <div>
+                  <p class="text-white text-left">Cancion</p>
+                  <p class="text-white text-center">Artista</p>
+                </div>
+                <div>
+                  <p class="text-white text-center">Album</p>
+                  <p class="text-white text-center">Duracion</p>
+                </div>
+              </div>
+            </li> -->
+            <!-- <li><img src="https://picsum.photos/200/300" alt="" /></li>
+            <li><img src="https://picsum.photos/200/300" alt="" /></li>
+            <li><img src="https://picsum.photos/200/300" alt="" /></li>
+            <li><img src="https://picsum.photos/200/300" alt="" /></li>
+            <li><img src="https://picsum.photos/200/300" alt="" /></li>
+            <li><img src="https://picsum.photos/200/300" alt="" /></li>
+            <li><img src="https://picsum.photos/200/300" alt="" /></li>
+            <li><img src="https://picsum.photos/200/300" alt="" /></li> -->
+          </ul>
+        </section>
+        <div id="song-detail"></div>
+        <!-- <audio src="https://api.spotify.com/v1/tracks/5y1kheWw8d3DHl8bv5aEE8" autoplay></audio> -->
+      </main>
+    </div>
 
       <!-- Sidebar -->
       <div class="drawer-side">
