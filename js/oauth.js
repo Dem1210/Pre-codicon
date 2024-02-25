@@ -6,3 +6,6 @@ const spotifyUrl = `htpps://acocounts.spotify.com/authorie?client_id=${clientId}
 function login() {
   window.location.href = spotifyUrl;
 }
+
+
+
