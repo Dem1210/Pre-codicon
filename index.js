@@ -14,12 +14,13 @@ const APIController = (function () {
     });
 
     const data = await result.json();
+    console.log(data.access_token);
     return data.access_token;
   };
 
   const _getGenres = async (token) => {
     const result = await fetch(
-      `https://api.spotify.com/v1/browse/categories?locale=sv_US`,
+      `https://api.spotify.com/v1/browse/categories?locale=es_MX`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },
@@ -31,7 +32,7 @@ const APIController = (function () {
   };
 
   const _getPlaylistByGenre = async (token, genreId) => {
-    const limit = 10;
+    const limit = 50;
 
     const result = await fetch(
       `https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`,
@@ -46,7 +47,7 @@ const APIController = (function () {
   };
 
   const _getTracks = async (token, tracksEndPoint) => {
-    const limit = 10;
+    const limit = 20;
 
     const result = await fetch(`${tracksEndPoint}?limit=${limit}`, {
       method: "GET",
@@ -144,7 +145,7 @@ const UIController = (function () {
 
       const html = `<audio src="${preview_song}" autoplay></audio>`;
 
-      //     const html = `<iframe
+      //   const html = `<iframe
       //   title="Spotify Embed: Recommendation Playlist "
       //   src="${url_song}utm_source=generator&theme=0"
       //   width="100%"
@@ -280,6 +281,79 @@ const APPController = (function (UICtrl, APICtrl) {
       track.artists[0].name,
       track.preview_url
     );
+  });
+
+  async function getRecommendationsAsync(token) {
+    if (!token) {
+      token = UICtrl.getStoredToken().token;
+    }
+
+    if (!token) {
+      console.error("No token");
+      return;
+    }
+
+    const popularGenres = ["rock", "pop", "hip-hop", "electronic", "country"];
+    const randomGenre =
+      popularGenres[Math.floor(Math.random() * popularGenres.length)];
+
+    const response = await fetch(
+      `https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${randomGenre}&market=US`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const data = await response.json();
+    const songs = data.tracks;
+    const songTitles = songs.map((song) => song.name);
+    const songURIs = songs.map((song) => song.uri);
+    track.innerHTML = songTitles;
+    artist.innerHTML = songs[0].artists[0].name;
+
+    description.innerText = `
+      Artista: ${songs[0].artists[0].name}
+      Fecha de salida: ${songs[0].album.release_date}
+      Cancion Nro: ${songs.indexOf(songs[0]) + 1}
+      `;
+
+    const albumURIs = songs.map((song) => song.album.images[0].url);
+    album.src = albumURIs[0];
+
+    let audio;
+    play.addEventListener("click", () => {
+      if (audio) {
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+          audio.remove();
+          audio = null;
+        }
+      } else {
+        audio = new Audio(songs[0].preview_url);
+        audio.play();
+      }
+    });
+  }
+
+  const album = document.getElementById("album-cover");
+  const track = document.getElementById("song-name");
+  const play = document.getElementById("play");
+  const like = document.getElementById("like");
+  const quite = document.getElementById("quite");
+  const artist = document.getElementById("artist-name");
+  const description = document.getElementById("song-description");
+
+  const descubrir = document.getElementById("descubrir");
+  descubrir.addEventListener("click", () => {
+    getRecommendationsAsync();
   });
 
   return {
