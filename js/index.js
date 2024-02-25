@@ -131,7 +131,7 @@ const UIController = (function () {
     createTrack(id, name, preview) {
       // const html = `<a href="#" class="list-group-item list-group-item-action list-group-item-light" id="${id}">${name} - ${preview}</a>`;
       // const html = `<a href="#" class="flex flex-col" id="${id}">${name} - <img src="${preview}" alt="${name}"></a>`;
-      const html = `<li><a class="list-group-item flex flex-col">${name} <img src="${preview}" alt="${name}" width="200" height="300"></a><a href="${id}">Escuchar</a></li>`;
+      const html = `<li class="flex flex-col justify-center align-center text-center "><a class="list-group-item flex flex-col line-clamp-1 ">${name} <img src="${preview}" alt="${name}" width="200" height="300" class="rounded-md"></a><a href="${id}">Escuchar</a></li>`;
       document
         .querySelector(DOMElements.divSonglist)
         .insertAdjacentHTML("beforeend", html);
